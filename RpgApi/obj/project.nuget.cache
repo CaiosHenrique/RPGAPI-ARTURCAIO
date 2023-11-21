@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "o3QTlSwVazIaS53EsPmzjWD2egAuD9jE37T0Ubh6n1mEgv+4zDeg1nSh0IuuibTOd2/nfAIOhf9EeouHEZmPqA==",
+  "success": false,
+  "projectFilePath": "D:\\PastaLocal\\2DS\\DSI-Luiz e Quiteria\\A16\\A16_CopiarParaAula\\RpgApi\\RpgApi.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Não é possível carregar o índice de serviço para a origem https://api.nuget.org/v3/index.json.",
+      "libraryId": "Microsoft.AspNetCore.Mvc.NewtonsoftJson"
+    }
+  ]
+}
