@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\2DS_Michel\\DS\\RpgMvc\\RpgMvc.csproj": {}
+    "D:\\RPGAPIAC\\RPGAPI-ARTURCAIO\\RpgMvc-master\\RpgMvc-master\\RpgMvc.csproj": {}
   },
   "projects": {
-    "D:\\2DS_Michel\\DS\\RpgMvc\\RpgMvc.csproj": {
+    "D:\\RPGAPIAC\\RPGAPI-ARTURCAIO\\RpgMvc-master\\RpgMvc-master\\RpgMvc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\2DS_Michel\\DS\\RpgMvc\\RpgMvc.csproj",
+        "projectUniqueName": "D:\\RPGAPIAC\\RPGAPI-ARTURCAIO\\RpgMvc-master\\RpgMvc-master\\RpgMvc.csproj",
         "projectName": "RpgMvc",
-        "projectPath": "D:\\2DS_Michel\\DS\\RpgMvc\\RpgMvc.csproj",
+        "projectPath": "D:\\RPGAPIAC\\RPGAPI-ARTURCAIO\\RpgMvc-master\\RpgMvc-master\\RpgMvc.csproj",
         "packagesPath": "C:\\Users\\etechas\\.nuget\\packages\\",
-        "outputPath": "D:\\2DS_Michel\\DS\\RpgMvc\\obj\\",
+        "outputPath": "D:\\RPGAPIAC\\RPGAPI-ARTURCAIO\\RpgMvc-master\\RpgMvc-master\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "E4Ug/HZhVZMtVEnMfbmXQ6pUUsNH9BC/+3T2sJyEMKHsJaHOrALn6EoSAM6JJvCaeXeM0rmCTPjuo1gnB9pXDQ==",
+  "dgSpecHash": "WXUNlz8zTPD/9idHN7fKe95OFtQZ7Pw0zuttOJmtGEIS0iszVkke/ELiydkPk2cYflguJhIL75KVVFUuuWzNbA==",
   "success": true,
-  "projectFilePath": "D:\\2DS_Michel\\DS\\RpgMvc\\RpgMvc.csproj",
+  "projectFilePath": "D:\\RPGAPIAC\\RPGAPI-ARTURCAIO\\RpgMvc-master\\RpgMvc-master\\RpgMvc.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\etechas\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\7.0.13\\microsoft.aspnetcore.jsonpatch.7.0.13.nupkg.sha512",
     "C:\\Users\\etechas\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\7.0.13\\microsoft.aspnetcore.mvc.newtonsoftjson.7.0.13.nupkg.sha512",

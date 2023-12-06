@@ -86,6 +86,9 @@ namespace RpgMvc.Controllers
                     );
                     HttpContext.Session.SetString("SessionTokenUsuario", uLogado.Token);
                     HttpContext.Session.SetString("SessionUsername", uLogado.Username);
+                    HttpContext.Session.SetString("SessionPerfilUsuario", uLogado.Perfil);
+                    HttpContext.Session.SetString("SessionIdUsuario", uLogado.Id.ToString());
+
                     TempData["Mensagem"] = string.Format("Bem-vindo {0}!!!", uLogado.Username);
                     return RedirectToAction("Index", "Personagens");
                 }
@@ -219,7 +222,8 @@ namespace RpgMvc.Controllers
             }
         }
             [HttpPost]
-            public async Task<ActionResult> AlterarSenha(UsuarioViewModel u)  {
+            public async Task<ActionResult> AlterarSenha(UsuarioViewModel u)  
+            {
             try
             {
                 HttpClient httpClient = new HttpClient();
@@ -238,6 +242,100 @@ namespace RpgMvc.Controllers
             {
              return Json(ex.Message);
             }
+        }
+        [HttpPost]
+        public async Task<IActionResult> EnviarFoto(UsuarioViewModel u)
+        {
+            try
+            {
+                if(Request.Form.Files.Count == 0)
+                throw new System.Exception("Selecione o Arquivo");
+                else
+                {
+                    var file = Request.Form.Files[0];
+                    var fileName = Path.GetFileName(file.FileName);
+                    string nomeArquivoSemExtensao = Path.GetFileNameWithoutExtension(fileName);
+                    var extensao = Path.GetExtension(fileName);
+
+                    if (extensao != ".jpg" && extensao != "jpeg" && extensao != ".png")
+                    throw new SystemException("O Arquivo Selecionado não é uma foto");
+
+                    using (var ms = new MemoryStream())
+                    {
+                        file.CopyTo(ms);
+                        u.Foto =ms.ToArray();
+                    }
+                }
+                HttpClient httpClient = new HttpClient();
+                string token = HttpContext.Session.GetString("SessionTokenUsuario");
+                httpClient.DefaultRequestHeaders.Authorization = new
+                AuthenticationHeaderValue("Bearer", token);
+
+                string uriComplementar = "AtualizarFoto";
+                var content = new StringContent(JsonConvert.SerializeObject(u));
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                HttpResponseMessage response = await httpClient.PutAsync(uriBase + uriComplementar, content);
+                string serialized = await response.Content.ReadAsStringAsync();
+
+                if(response.StatusCode == System.Net.HttpStatusCode.OK)
+                TempData["Mensagem"] = "Foto Enviada com sucesso";
+                else
+                throw new System.Exception(serialized); 
+            }
+            catch(System.Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+            }
+            return RedirectToAction("IndexInformacoes");
+        }
+        [HttpGet]
+        public async Task<IActionResult> BaixarFoto()
+        {
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+                string login = HttpContext.Session.GetString("SessionUsername");
+                string uriComplementar =$"GetByLogin/{login}";
+                HttpResponseMessage response = await httpClient.GetAsync(uriBase + uriComplementar); 
+                string  serialized = await response.Content.ReadAsStringAsync();
+
+                if(response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    UsuarioViewModel viewModel = await Task.Run(() => JsonConvert.DeserializeObject<UsuarioViewModel>(serialized));
+
+                    string ContentType = System.Net.Mime.MediaTypeNames.Application.Octet;
+
+                    byte[] fileBytes = viewModel.Foto;
+                    string fileName = $"Foto{viewModel.Username}_{DateTime.Now:ddMMyyyyhhmmss}.png";
+                    return File(fileBytes, ContentType, fileName);
+                }
+                else
+                throw new System.Exception(serialized);             
+            }
+            catch (System.Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("IndexInformacoes");
+            }
         } 
+        [HttpGet]
+        public ActionResult Sair()
+        {
+            try
+            {
+                HttpContext.Session.Remove("SessionTokenUsuario");
+                HttpContext.Session.Remove("SessionUsername");
+                HttpContext.Session.Remove("SessionPerfilUsuario");
+                HttpContext.Session.Remove("SessionIdUsuario");
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (System.Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("IndexInformacoes");
+            }
+        }
     }
 }
